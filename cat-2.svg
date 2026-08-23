@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <radialGradient id="catGlow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d8b4e2" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#d8b4e2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="giftBoxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb3c6"/>
+      <stop offset="100%" stop-color="#ff4d79"/>
+    </linearGradient>
+    <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff2b3"/>
+      <stop offset="100%" stop-color="#f5ba42"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Aura Glow -->
+  <circle cx="200" cy="200" r="180" fill="url(#catGlow2)"/>
+
+  <!-- Kawaii Lavender Cat (Peeking / Sitting beside gift) -->
+  <g transform="translate(80, 130)">
+    <!-- Fluffy Tail Wagging -->
+    <path d="M40,160 Q-20,130 0,80 Q10,50 30,70 Q40,90 35,120" fill="none" stroke="#ede4f7" stroke-width="26" stroke-linecap="round"/>
+    <path d="M40,160 Q-20,130 0,80 Q10,50 30,70 Q40,90 35,120" fill="none" stroke="#cbb3e8" stroke-width="4" stroke-dasharray="6,6" stroke-linecap="round"/>
+
+    <!-- Cat Body -->
+    <ellipse cx="95" cy="165" rx="60" ry="55" fill="#ede4f7"/>
+    <ellipse cx="95" cy="175" rx="40" ry="36" fill="#f8f4fc"/>
+
+    <!-- Cat Head -->
+    <ellipse cx="105" cy="80" rx="58" ry="50" fill="#ede4f7"/>
+
+    <!-- Ears -->
+    <!-- Left Ear -->
+    <path d="M60,50 Q65,0 95,30 Z" fill="#ede4f7"/>
+    <path d="M68,46 Q72,12 90,32 Z" fill="#d8b4e2"/>
+    <!-- Right Ear -->
+    <path d="M120,30 Q150,0 155,50 Z" fill="#ede4f7"/>
+    <path d="M125,32 Q144,12 148,46 Z" fill="#d8b4e2"/>
+
+    <!-- Eyes (Playful & Happy Winking) -->
+    <!-- Left Eye (Open Sparkly) -->
+    <ellipse cx="85" cy="76" rx="9" ry="12" fill="#2a153b"/>
+    <circle cx="82" cy="72" r="4" fill="#ffffff"/>
+    <circle cx="88" cy="80" r="1.8" fill="#ffffff"/>
+    <!-- Right Eye (Happy Curved Wink) -->
+    <path d="M118,78 Q128,68 136,78" fill="none" stroke="#2a153b" stroke-width="3.5" stroke-linecap="round"/>
+
+    <!-- Rosy Lavender Cheeks -->
+    <ellipse cx="72" cy="88" rx="11" ry="6" fill="#e898bf" opacity="0.6"/>
+    <ellipse cx="138" cy="88" rx="11" ry="6" fill="#e898bf" opacity="0.6"/>
+
+    <!-- Nose & Smile -->
+    <polygon points="102,84 108,84 105,88" fill="#b96ec9"/>
+    <path d="M100,89 Q105,94 105,89 Q105,94 110,89" fill="none" stroke="#3d1d52" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Whiskers -->
+    <line x1="60" y1="84" x2="42" y2="80" stroke="#cbb3e8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="58" y1="92" x2="40" y2="96" stroke="#cbb3e8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="148" y1="84" x2="166" y2="80" stroke="#cbb3e8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="150" y1="92" x2="168" y2="96" stroke="#cbb3e8" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Cute Paw Resting on Gift -->
+    <ellipse cx="145" cy="180" rx="14" ry="10" fill="#ffffff" stroke="#cbb3e8" stroke-width="2"/>
+    <ellipse cx="110" cy="205" rx="14" ry="10" fill="#ffffff" stroke="#cbb3e8" stroke-width="2"/>
+  </g>
+
+  <!-- Gorgeous Birthday Gift Box in Foreground (Right) -->
+  <g transform="translate(190, 210)">
+    <!-- Shadow -->
+    <ellipse cx="75" cy="140" rx="65" ry="12" fill="rgba(0,0,0,0.3)"/>
+    <!-- Box Base -->
+    <rect x="20" y="50" width="110" height="85" rx="8" fill="url(#giftBoxGrad)"/>
+    <!-- Box Lid -->
+    <rect x="12" y="38" width="126" height="24" rx="6" fill="#ff7597"/>
+
+    <!-- Golden Vertical Ribbon -->
+    <rect x="63" y="38" width="24" height="97" fill="url(#ribbonGrad)"/>
+    <!-- Golden Horizontal Ribbon -->
+    <rect x="20" y="80" width="110" height="20" fill="url(#ribbonGrad)"/>
+
+    <!-- Big Satin Ribbon Bow on Top -->
+    <!-- Left Loop -->
+    <path d="M75,38 C40,0 20,25 65,36 Z" fill="url(#ribbonGrad)"/>
+    <!-- Right Loop -->
+    <path d="M75,38 C110,0 130,25 85,36 Z" fill="url(#ribbonGrad)"/>
+    <!-- Center Knot -->
+    <circle cx="75" cy="38" r="9" fill="#ffe066" stroke="#f5ba42" stroke-width="2"/>
+    <!-- Ribbon Tails -->
+    <path d="M72,44 Q60,65 50,75 Q62,65 74,47 Z" fill="#f5ba42"/>
+    <path d="M78,44 Q90,65 100,75 Q88,65 76,47 Z" fill="#f5ba42"/>
+  </g>
+
+  <!-- Twinkling Stars and Sparkles -->
+  <g fill="#ffe066">
+    <!-- Star 1 -->
+    <path d="M70,80 Q70,95 60,95 Q70,95 70,110 Q70,95 80,95 Q70,95 70,80"/>
+    <!-- Star 2 -->
+    <path d="M320,130 Q320,142 310,142 Q320,142 320,154 Q320,142 330,142 Q320,142 320,130"/>
+    <!-- Sparkles -->
+    <circle cx="170" cy="100" r="3" fill="#ffffff"/>
+    <circle cx="340" cy="200" r="2.5" fill="#d8b4e2"/>
+    <circle cx="80" cy="270" r="3" fill="#ffb6c1"/>
+  </g>
+</svg>

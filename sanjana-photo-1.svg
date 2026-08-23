@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="p1Bg" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#3d1b4d"/>
+      <stop offset="50%" stop-color="#1d0a27"/>
+      <stop offset="100%" stop-color="#0c0412"/>
+    </radialGradient>
+    <radialGradient id="fairyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffe8a3" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ffb347" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ffb347" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="silhouetteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#351842"/>
+      <stop offset="100%" stop-color="#12051a"/>
+    </linearGradient>
+    <filter id="p1Glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Photo Background -->
+  <rect width="500" height="600" rx="16" fill="url(#p1Bg)"/>
+
+  <!-- Starlight Nebula -->
+  <circle cx="250" cy="200" r="160" fill="#ff7597" opacity="0.12" filter="url(#p1Glow)"/>
+  <circle cx="200" cy="160" r="100" fill="#d8b4e2" opacity="0.18" filter="url(#p1Glow)"/>
+
+  <!-- Romantic Fairy Light Strings -->
+  <path d="M-20,40 Q130,120 280,60 T520,70" fill="none" stroke="rgba(255,230,180,0.3)" stroke-width="1.5"/>
+  <path d="M-20,100 Q150,180 320,110 T520,140" fill="none" stroke="rgba(255,230,180,0.25)" stroke-width="1.5"/>
+
+  <!-- Fairy Light Bulbs & Glowing Orbs -->
+  <g>
+    <!-- Row 1 -->
+    <circle cx="60" cy="75" r="16" fill="url(#fairyGlow)"/>
+    <circle cx="60" cy="75" r="4" fill="#fffdfa"/>
+    <circle cx="150" cy="105" r="20" fill="url(#fairyGlow)"/>
+    <circle cx="150" cy="105" r="5" fill="#fffdfa"/>
+    <circle cx="240" cy="75" r="18" fill="url(#fairyGlow)"/>
+    <circle cx="240" cy="75" r="4.5" fill="#fffdfa"/>
+    <circle cx="340" cy="65" r="16" fill="url(#fairyGlow)"/>
+    <circle cx="340" cy="65" r="4" fill="#fffdfa"/>
+    <circle cx="430" cy="80" r="22" fill="url(#fairyGlow)"/>
+    <circle cx="430" cy="80" r="5" fill="#fffdfa"/>
+
+    <!-- Row 2 -->
+    <circle cx="90" cy="140" r="14" fill="url(#fairyGlow)"/>
+    <circle cx="90" cy="140" r="3.5" fill="#fffdfa"/>
+    <circle cx="200" cy="160" r="18" fill="url(#fairyGlow)"/>
+    <circle cx="200" cy="160" r="4.5" fill="#fffdfa"/>
+    <circle cx="300" cy="120" r="15" fill="url(#fairyGlow)"/>
+    <circle cx="300" cy="120" r="4" fill="#fffdfa"/>
+    <circle cx="400" cy="130" r="18" fill="url(#fairyGlow)"/>
+    <circle cx="400" cy="130" r="4.5" fill="#fffdfa"/>
+  </g>
+
+  <!-- Twinkling Sparkles -->
+  <g fill="#ffffff">
+    <circle cx="80" cy="240" r="1.5" opacity="0.7"/>
+    <circle cx="420" cy="220" r="2" opacity="0.8"/>
+    <circle cx="380" cy="300" r="1.5" opacity="0.6"/>
+    <circle cx="100" cy="360" r="2" opacity="0.7"/>
+    <circle cx="440" cy="400" r="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Elegant Silhouette of Sanjana with Flowing Hair & Sparkle Dress -->
+  <g>
+    <!-- Soft Rim Glow Behind Figure -->
+    <ellipse cx="250" cy="400" rx="90" ry="140" fill="#ff9ebb" opacity="0.22" filter="url(#p1Glow)"/>
+    
+    <!-- Hair & Head Profile -->
+    <circle cx="250" cy="300" r="48" fill="url(#silhouetteGrad)"/>
+    <!-- Flowing wavy hair locks -->
+    <path d="M210,290 C190,340 180,410 210,480 C220,440 230,380 230,340 Z" fill="#200a2a"/>
+    <path d="M290,290 C315,350 325,420 300,490 C285,445 275,385 270,340 Z" fill="#200a2a"/>
+    <path d="M230,270 Q250,240 270,270 Q285,320 280,350 Q250,340 230,270 Z" fill="#290e36"/>
+
+    <!-- Neck & Shoulders -->
+    <path d="M236,340 L264,340 L275,370 L225,370 Z" fill="url(#silhouetteGrad)"/>
+    <!-- Dress / Torso Silhouette -->
+    <path d="M225,370 C205,395 180,450 170,550 L330,550 C320,450 295,395 275,370 Z" fill="url(#silhouetteGrad)"/>
+    
+    <!-- Sparkles on dress -->
+    <circle cx="230" cy="430" r="2" fill="#ffd1b3" opacity="0.9"/>
+    <circle cx="270" cy="450" r="1.5" fill="#ffb6c1" opacity="0.8"/>
+    <circle cx="250" cy="480" r="2.5" fill="#fff" opacity="0.9"/>
+    <circle cx="220" cy="510" r="1.5" fill="#ffd1b3" opacity="0.7"/>
+    <circle cx="280" cy="520" r="2" fill="#ffb6c1" opacity="0.85"/>
+  </g>
+
+  <!-- Floating Rose Petals around portrait -->
+  <g fill="#ff7597">
+    <ellipse cx="140" cy="420" rx="10" ry="5" transform="rotate(30 140 420)" opacity="0.8"/>
+    <ellipse cx="360" cy="380" rx="12" ry="6" transform="rotate(-40 360 380)" opacity="0.85"/>
+    <ellipse cx="330" cy="470" rx="9" ry="4.5" transform="rotate(15 330 470)" opacity="0.75"/>
+    <ellipse cx="160" cy="500" rx="11" ry="5.5" transform="rotate(-20 160 500)" opacity="0.7"/>
+  </g>
+
+  <!-- Photo Caption Overlay -->
+  <rect x="30" y="520" width="440" height="55" rx="12" fill="rgba(15, 6, 22, 0.75)" stroke="rgba(255, 182, 193, 0.2)" stroke-width="1"/>
+  <text x="250" y="555" text-anchor="middle" font-family="'Caveat', cursive, sans-serif" font-size="22" font-weight="700" fill="#fff5fa" letter-spacing="1">✨ That unforgettable starry night ✨</text>
+</svg>

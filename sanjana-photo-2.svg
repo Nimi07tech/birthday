@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="p2Bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#2c1740"/>
+      <stop offset="55%" stop-color="#14061e"/>
+      <stop offset="100%" stop-color="#07020a"/>
+    </radialGradient>
+    <radialGradient id="lanternGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff2cc" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ff9966" stop-opacity="0.6"/>
+      <stop offset="80%" stop-color="#ff5e62" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ff5e62" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lanternBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe6aa"/>
+      <stop offset="50%" stop-color="#ff9248"/>
+      <stop offset="100%" stop-color="#e63946"/>
+    </linearGradient>
+    <filter id="p2Glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Photo Background -->
+  <rect width="500" height="600" rx="16" fill="url(#p2Bg)"/>
+
+  <!-- Dreamy Crescent Moon -->
+  <circle cx="400" cy="110" r="35" fill="#fff5e6" opacity="0.9" filter="url(#p2Glow)"/>
+  <circle cx="412" cy="104" r="32" fill="#180a24"/>
+
+  <!-- Romantic Sakura / Cherry Blossom Branch -->
+  <g stroke="#3a1e2d" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M-10,30 Q120,60 220,110 T420,180"/>
+    <path d="M120,60 Q170,30 240,40"/>
+    <path d="M220,110 Q260,80 320,85"/>
+  </g>
+
+  <!-- Cherry Blossom Flowers on Branch -->
+  <g fill="#ffb6c1">
+    <!-- Flower Cluster 1 -->
+    <circle cx="110" cy="50" r="10" opacity="0.9"/>
+    <circle cx="125" cy="55" r="9" opacity="0.85"/>
+    <circle cx="115" cy="65" r="8" opacity="0.9"/>
+    <circle cx="118" cy="56" r="3" fill="#ffe066"/>
+
+    <!-- Flower Cluster 2 -->
+    <circle cx="210" cy="95" r="11" opacity="0.9"/>
+    <circle cx="225" cy="100" r="10" opacity="0.85"/>
+    <circle cx="215" cy="112" r="9" opacity="0.9"/>
+    <circle cx="218" cy="102" r="3.5" fill="#ffe066"/>
+
+    <!-- Flower Cluster 3 -->
+    <circle cx="310" cy="80" r="10" opacity="0.9"/>
+    <circle cx="325" cy="85" r="8" opacity="0.85"/>
+    <circle cx="318" cy="95" r="9" opacity="0.9"/>
+    <circle cx="318" cy="86" r="3" fill="#ffe066"/>
+  </g>
+
+  <!-- Glowing Sky Lanterns floating upward -->
+  <!-- Lantern 1 (Main Big) -->
+  <g transform="translate(180, 260)">
+    <circle cx="30" cy="40" r="50" fill="url(#lanternGlow)"/>
+    <path d="M10,20 Q30,12 50,20 L58,60 Q30,68 2,60 Z" fill="url(#lanternBody)"/>
+    <ellipse cx="30" cy="60" rx="28" ry="4" fill="#d62828"/>
+    <circle cx="30" cy="45" r="8" fill="#ffffff" filter="url(#p2Glow)"/>
+  </g>
+
+  <!-- Lantern 2 (Mid-distance) -->
+  <g transform="translate(320, 180) scale(0.65)">
+    <circle cx="30" cy="40" r="45" fill="url(#lanternGlow)"/>
+    <path d="M10,20 Q30,12 50,20 L58,60 Q30,68 2,60 Z" fill="url(#lanternBody)"/>
+    <circle cx="30" cy="45" r="8" fill="#ffffff"/>
+  </g>
+
+  <!-- Lantern 3 (Far distant) -->
+  <g transform="translate(90, 190) scale(0.4)">
+    <circle cx="30" cy="40" r="40" fill="url(#lanternGlow)"/>
+    <path d="M10,20 Q30,12 50,20 L58,60 Q30,68 2,60 Z" fill="url(#lanternBody)"/>
+  </g>
+
+  <!-- Lantern 4 (Very far) -->
+  <g transform="translate(280, 130) scale(0.25)">
+    <circle cx="30" cy="40" r="40" fill="url(#lanternGlow)"/>
+    <path d="M10,20 Q30,12 50,20 L58,60 Q30,68 2,60 Z" fill="url(#lanternBody)"/>
+  </g>
+
+  <!-- Romantic Balcony Silhouette of Sanjana Looking at Lanterns -->
+  <g>
+    <!-- Balcony Railing -->
+    <rect x="0" y="470" width="500" height="15" fill="#1a0922"/>
+    <line x1="60" y1="485" x2="60" y2="550" stroke="#1a0922" stroke-width="4"/>
+    <line x1="120" y1="485" x2="120" y2="550" stroke="#1a0922" stroke-width="4"/>
+    <line x1="180" y1="485" x2="180" y2="550" stroke="#1a0922" stroke-width="4"/>
+    <line x1="240" y1="485" x2="240" y2="550" stroke="#1a0922" stroke-width="4"/>
+    <line x1="300" y1="485" x2="300" y2="550" stroke="#1a0922" stroke-width="4"/>
+    <line x1="360" y1="485" x2="360" y2="550" stroke="#1a0922" stroke-width="4"/>
+    <line x1="420" y1="485" x2="420" y2="550" stroke="#1a0922" stroke-width="4"/>
+
+    <!-- Sanjana Silhouette with delicate posture -->
+    <circle cx="150" cy="370" r="32" fill="#14061d"/>
+    <!-- Flowing Ponytail / Hair -->
+    <path d="M130,370 C110,400 100,440 120,470 C130,440 135,410 140,380 Z" fill="#100418"/>
+    <!-- Shoulder & Arms leaning gracefully on balcony -->
+    <path d="M135,400 L165,400 L180,470 L120,470 Z" fill="#14061d"/>
+    <path d="M165,420 L210,470 L195,475 L155,435 Z" fill="#14061d"/>
+  </g>
+
+  <!-- Twinkling Sparkles & Stars -->
+  <g fill="#ffffff" opacity="0.8">
+    <circle cx="70" cy="140" r="1.5"/>
+    <circle cx="260" cy="220" r="2"/>
+    <circle cx="450" cy="250" r="1.5"/>
+    <circle cx="370" cy="320" r="2"/>
+  </g>
+
+  <!-- Photo Caption Overlay -->
+  <rect x="30" y="520" width="440" height="55" rx="12" fill="rgba(15, 6, 22, 0.75)" stroke="rgba(255, 182, 193, 0.2)" stroke-width="1"/>
+  <text x="250" y="555" text-anchor="middle" font-family="'Caveat', cursive, sans-serif" font-size="22" font-weight="700" fill="#fff5fa" letter-spacing="1">✨ Wishes floating into the midnight sky ✨</text>
+</svg>

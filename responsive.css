@@ -1,0 +1,187 @@
+/* Responsive Design & Accessibility Adjustments */
+
+@media (max-width: 992px) {
+  .cats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 650px;
+  }
+
+  .cat-card:nth-child(n) {
+    transform: none;
+  }
+
+  .photos-memory-container {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 16px;
+  }
+
+  .pin-container {
+    padding: 36px 20px;
+  }
+
+  .pin-inputs {
+    gap: 10px;
+  }
+
+  .pin-digit {
+    width: 52px;
+    height: 62px;
+    font-size: 1.7rem;
+    border-radius: 12px;
+  }
+
+  .hero-heading {
+    margin-bottom: 12px;
+  }
+
+  .cats-grid {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+    gap: 20px;
+  }
+
+  .photos-memory-container {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .memory-photo-card {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .memory-photo-card.card-left,
+  .memory-photo-card.card-right {
+    transform: none;
+  }
+
+  .memory-photo-card.revealed.card-left,
+  .memory-photo-card.revealed.card-right {
+    transform: none;
+  }
+
+  .photo-inner-frame {
+    height: 320px;
+  }
+
+  .music-player-card {
+    padding: 30px 22px;
+    border-radius: 28px;
+    gap: 24px;
+  }
+
+  .music-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .album-stage {
+    width: 150px;
+    height: 150px;
+  }
+
+  .album-cover-wrap {
+    width: 150px;
+    height: 150px;
+    border-radius: 22px;
+  }
+
+  .vinyl-disc {
+    width: 130px;
+    height: 130px;
+  }
+
+  .song-details {
+    text-align: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .song-title-row {
+    justify-content: center;
+  }
+
+  .song-badge {
+    margin: 0 auto;
+  }
+
+  .equalizer-container {
+    justify-content: center;
+  }
+
+  .cake-stage-container {
+    height: 420px;
+  }
+
+  .cake-wrapper {
+    width: 290px;
+    height: 270px;
+  }
+
+  .cake-plate {
+    width: 310px;
+  }
+
+  .cake-body {
+    width: 250px;
+    height: 170px;
+  }
+
+  .letter-stationery-card {
+    padding: 40px 24px;
+  }
+
+  .letter-wax-seal {
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pin-digit {
+    width: 44px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+
+  .music-controls {
+    gap: 20px;
+  }
+
+  .volume-wrap {
+    display: none; /* Hide volume slider on compact mobile screens */
+  }
+
+  .final-photo-composition {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* Accessibility: Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ambient-glow,
+  .heart-pulse,
+  .btn-play-pulse,
+  .final-photo-ring,
+  .equalizer-bars.playing .eq-bar {
+    animation: none !important;
+  }
+}

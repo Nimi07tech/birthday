@@ -1,0 +1,530 @@
+/* ==========================================================================
+   SECTION 6: REALISTIC INTERACTIVE BIRTHDAY CAKE & SLICE PHYSICS
+   ========================================================================== */
+
+.cake-section {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Subtle Interactive Badge */
+.interactive-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 18px;
+  background: rgba(255, 117, 151, 0.12);
+  border: 1px solid rgba(255, 182, 193, 0.35);
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--pastel-pink);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  box-shadow: 0 0 15px rgba(255, 77, 121, 0.2);
+  animation: badgeGlowPulse 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes badgeGlowPulse {
+  0% { box-shadow: 0 0 10px rgba(255, 77, 121, 0.15); border-color: rgba(255, 182, 193, 0.25); }
+  100% { box-shadow: 0 0 25px rgba(255, 77, 121, 0.45); border-color: rgba(255, 117, 151, 0.6); }
+}
+
+.cake-title-glow {
+  font-family: 'Plus Jakarta Sans', 'Quicksand', sans-serif;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 0%, #ffc2d1 40%, #ff6b95 80%, #ffd1b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 25px rgba(255, 77, 121, 0.65)) drop-shadow(0 0 50px rgba(255, 182, 193, 0.3));
+  margin-bottom: 12px;
+}
+
+/* Drag Hint */
+.drag-hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px;
+  background: rgba(35, 12, 30, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 117, 151, 0.35);
+  border-radius: 30px;
+  font-size: 1.15rem;
+  color: #ffccd5;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 77, 121, 0.2);
+  transition: all 0.4s ease;
+  animation: pulseHint 2s infinite ease-in-out;
+}
+
+@keyframes pulseHint {
+  0%, 100% { transform: scale(1); border-color: rgba(255, 117, 151, 0.35); }
+  50% { transform: scale(1.04); border-color: #ff4d79; box-shadow: 0 0 25px rgba(255, 77, 121, 0.5); }
+}
+
+/* Cake Stage Container */
+.cake-stage-container {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  touch-action: none;
+  cursor: grab;
+}
+
+.cake-stage-container:active {
+  cursor: grabbing;
+}
+
+/* Dynamic Interactive Pastry Knife following cursor */
+.cake-knife-cursor {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-35deg);
+  transition: opacity 0.25s ease;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+}
+
+.cake-stage-container:hover .cake-knife-cursor {
+  opacity: 1;
+}
+
+/* Cutting Blade Canvas for Sparks & Trail */
+#cuttingCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 25;
+}
+
+/* 3D Realistic Cake Wrapper */
+.cake-wrapper {
+  position: relative;
+  width: 380px;
+  height: 340px;
+  transform-style: preserve-3d;
+  transform: rotateX(14deg) rotateY(-8deg);
+  transition: transform 0.6s var(--ease-smooth);
+}
+
+/* Ambient Candlelight Glow projected onto cake */
+.candlelight-halo {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 220px;
+  background: radial-gradient(ellipse at center 20%, rgba(255, 190, 80, 0.35) 0%, rgba(255, 100, 60, 0.15) 45%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(20px);
+  z-index: 12;
+  animation: candleGlowBreath 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes candleGlowBreath {
+  0% { opacity: 0.75; transform: translateX(-50%) scale(0.95); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+}
+
+/* Porcelain Cake Stand & Natural Shadows */
+.cake-stand {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 410px;
+  height: 55px;
+  z-index: 1;
+}
+
+.stand-plate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 38px;
+  background: radial-gradient(ellipse at 50% 30%, #ffffff 0%, #f4e8f7 50%, #d8c2e6 85%, #8f6da8 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    0 0 35px rgba(216, 180, 226, 0.4),
+    inset 0 2px 6px rgba(255, 255, 255, 0.9),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.stand-rim-bevel {
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  width: calc(100% - 24px);
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+}
+
+.stand-base-shadow {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 25px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 80%);
+  border-radius: 50%;
+  filter: blur(8px);
+}
+
+/* Main Realistic Cake Body Structure */
+.cake-body {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 210px;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+
+/* Outer Frosting Cylinder (Smooth Fondant / Buttercream with Texture) */
+.cake-main {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff9ebb 0%, #ff527f 40%, #e0245e 75%, #8a0e35 100%);
+  border-radius: 160px / 45px;
+  border-bottom-left-radius: 160px 75px;
+  border-bottom-right-radius: 160px 75px;
+  box-shadow: 
+    inset 0 15px 30px rgba(255, 255, 255, 0.45),
+    inset 0 -25px 40px rgba(0, 0, 0, 0.45),
+    0 15px 35px rgba(0, 0, 0, 0.5);
+  transition: all 0.6s var(--ease-spring);
+  overflow: hidden;
+}
+
+/* Cream Ribbons & Texture along Cake Wall */
+.cake-main::before {
+  content: '';
+  position: absolute;
+  top: 55px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 210, 225, 0.9), rgba(255, 255, 255, 0.8));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+}
+
+.cake-main::after {
+  content: '';
+  position: absolute;
+  top: 115px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 210, 225, 0.9), rgba(255, 255, 255, 0.8));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+}
+
+/* Realistic Glossy Top Cream / Glaze */
+.cake-top-cream {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, #fff0f5 45%, #ffd1dc 85%, #ffb6c1 100%);
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 3px 8px rgba(255, 255, 255, 0.9),
+    inset 0 -4px 12px rgba(220, 100, 140, 0.35),
+    0 6px 20px rgba(255, 77, 121, 0.3);
+  z-index: 6;
+}
+
+/* Cream Rosettes / Scallops along Top Edge */
+.cream-rosettes-ring {
+  position: absolute;
+  top: -28px;
+  left: 0;
+  width: 100%;
+  height: 88px;
+  pointer-events: none;
+  z-index: 7;
+}
+
+/* Realistic Strawberries, Blueberries, and Gold Dust */
+.cake-toppings-group {
+  position: absolute;
+  top: -38px;
+  width: 100%;
+  height: 95px;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.real-strawberry {
+  position: absolute;
+  width: 28px;
+  height: 34px;
+  background: radial-gradient(circle at 35% 30%, #ff5277 0%, #d81b60 55%, #7a0c32 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+}
+
+.real-strawberry::before {
+  content: '🌿';
+  position: absolute;
+  top: -12px;
+  left: 3px;
+  font-size: 13px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.real-strawberry::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  width: 18px;
+  height: 18px;
+  background: repeating-radial-gradient(circle, #ffe066 0, #ffe066 1px, transparent 1px, transparent 4px);
+  opacity: 0.6;
+}
+
+.sb-pos-1 { top: 28px; left: 55px; transform: rotate(-18deg) scale(0.95); }
+.sb-pos-2 { top: 12px; left: 146px; transform: rotate(4deg) scale(1.05); }
+.sb-pos-3 { top: 28px; right: 55px; transform: rotate(20deg) scale(0.95); }
+.sb-pos-4 { top: 44px; left: 105px; transform: rotate(-8deg) scale(0.88); }
+.sb-pos-5 { top: 44px; right: 105px; transform: rotate(12deg) scale(0.88); }
+
+/* Edible Gold Flakes & Shimmer Dust */
+.gold-leaf-speck {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, #fff2a3, #f59e0b);
+  border-radius: 2px;
+  box-shadow: 0 0 6px #ffe066;
+  filter: drop-shadow(0 0 4px #ffd166);
+}
+
+.g-1 { top: 38px; left: 88px; transform: rotate(25deg); }
+.g-2 { top: 22px; left: 190px; transform: rotate(-40deg); }
+.g-3 { top: 52px; right: 80px; transform: rotate(15deg); }
+.g-4 { top: 28px; right: 140px; transform: rotate(50deg); }
+
+/* Realistic Birthday Candles with Animated Organic Flame */
+.candles-container {
+  position: absolute;
+  top: -82px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 38px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.real-candle {
+  position: relative;
+  width: 12px;
+  height: 58px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(45deg, #ffd166, #ffd166 7px, #ff4d79 7px, #ff4d79 14px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4), inset 0 1px 3px rgba(255, 255, 255, 0.7);
+}
+
+.real-candle::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5px;
+  height: 7px;
+  background: #331508;
+  border-radius: 1px;
+}
+
+/* Realistic 3-Layer Flame */
+.real-flame {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 28px;
+  background: radial-gradient(ellipse at 50% 85%, #ffffff 0%, #fff7b3 25%, #ffb703 55%, #fb8500 80%, rgba(208, 0, 0, 0.2) 100%);
+  border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+  filter: drop-shadow(0 0 12px #ffb703) drop-shadow(0 0 24px #fb8500) drop-shadow(0 0 40px rgba(255, 77, 0, 0.5));
+  animation: organicFlicker 0.25s infinite alternate ease-in-out;
+  transform-origin: 50% 90%;
+}
+
+.c-1 .real-flame { animation-delay: 0.05s; }
+.c-2 .real-flame { animation-delay: 0.15s; }
+.c-3 .real-flame { animation-delay: 0.22s; }
+
+@keyframes organicFlicker {
+  0% { transform: translateX(-50%) scale(0.96) rotate(-2.5deg); filter: drop-shadow(0 0 10px #ffb703) drop-shadow(0 0 20px #fb8500); }
+  50% { transform: translateX(-50%) scale(1.06) rotate(1.5deg); filter: drop-shadow(0 0 14px #ffb703) drop-shadow(0 0 28px #fb8500); }
+  100% { transform: translateX(-50%) scale(1.14) rotate(3.5deg); filter: drop-shadow(0 0 18px #ffb703) drop-shadow(0 0 35px #ff6600); }
+}
+
+/* Realistic 3D Separating Cake Wedge Slice */
+.cake-slice {
+  position: absolute;
+  top: -8px;
+  right: 25px;
+  width: 110px;
+  height: 215px;
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 15;
+}
+
+.cake-slice.cut-separated {
+  opacity: 1;
+  transform: translate3d(70px, -20px, 95px) rotateY(-18deg) rotateZ(6deg);
+}
+
+/* Exposed Interior Cross-Section Texture (Vanilla Sponge, Raspberry Coulis, Buttercream) */
+.slice-interior {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #fff5fa 0px,
+    #fff5fa 12px,  /* Top Vanilla Buttercream */
+    #ffd1b3 12px,
+    #f8c291 32px,  /* Golden Vanilla Sponge Layer 1 */
+    #c41849 32px,
+    #c41849 40px,  /* Luscious Raspberry Jam Coulis */
+    #fff5fa 40px,
+    #fff5fa 50px,  /* Cream Layer */
+    #ffd1b3 50px,
+    #f8c291 74px,  /* Sponge Layer 2 */
+    #c41849 74px,
+    #c41849 82px,  /* Jam Layer 2 */
+    #fff5fa 82px,
+    #fff5fa 92px,  /* Cream Layer */
+    #ffd1b3 92px,
+    #f8c291 120px, /* Sponge Layer 3 Base */
+    #fff0f5 120px,
+    #fff0f5 130px
+  );
+  box-shadow: 
+    0 25px 45px rgba(0, 0, 0, 0.7),
+    inset 0 2px 6px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 200, 215, 0.6);
+}
+
+/* Exposed cake core cut cavity after slice removed */
+.cake-cut-cavity {
+  position: absolute;
+  top: 15px;
+  right: 40px;
+  width: 80px;
+  height: 180px;
+  background: rgba(80, 10, 30, 0.65);
+  border-radius: 8px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.cake-cut-cavity.revealed {
+  opacity: 1;
+}
+
+/* Celebration Banner */
+.cake-celebration-message {
+  margin-top: 28px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(25px) scale(0.92);
+  transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cake-celebration-message.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.cake-wish-text {
+  font-family: 'Plus Jakarta Sans', 'Quicksand', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 2.9rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #ffb6c1 40%, #ffd166 80%, #ff9f1c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 25px rgba(255, 77, 121, 0.7));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cake-stage-container {
+    height: 440px;
+  }
+
+  .cake-wrapper {
+    width: 300px;
+    height: 280px;
+    transform: rotateX(12deg) rotateY(-6deg) scale(0.9);
+  }
+
+  .stand-plate {
+    width: 330px;
+  }
+
+  .cake-body {
+    width: 260px;
+    height: 180px;
+  }
+
+  .real-candle {
+    height: 48px;
+    width: 10px;
+  }
+
+  .real-flame {
+    top: -24px;
+    width: 14px;
+    height: 24px;
+  }
+}
